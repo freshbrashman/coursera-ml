@@ -17,7 +17,13 @@ grad = zeros(size(theta));
 %               Compute the partial derivatives and set grad to the partial
 %               derivatives of the cost w.r.t. each parameter in theta
 
+theta_exceptBias = theta;
+theta_exceptBias(1) = 0;
 
+J = 1 / m * sum(-y .* log(sigmoid(X*theta)) - (1 - y) .* log(1 - sigmoid(X*theta))) + lambda / 2 / m * sum(theta_exceptBias .^ 2);
+
+grad = 1 / m * sum((sigmoid(X*theta) - y) .* X ) + lambda / m * theta_exceptBias';
+grad = grad';
 
 
 
