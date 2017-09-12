@@ -36,14 +36,11 @@ grad = zeros(size(theta));
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
 
+theta_exceptBias = theta;
+theta_exceptBias(1) = 0;
 
-
-
-
-
-
-
-
+J = 1 / m * sum(-y .* log(sigmoid(X*theta)) - (1 - y) .* log(1 - sigmoid(X*theta))) + lambda / 2 / m * sum(theta_exceptBias .^ 2);
+grad = 1 / m * sum((sigmoid(X*theta) - y) .* X ) + lambda / m * theta_exceptBias';
 
 % =============================================================
 
