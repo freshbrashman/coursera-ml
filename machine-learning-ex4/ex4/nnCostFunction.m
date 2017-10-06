@@ -62,9 +62,19 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+X_addBias = [ones(m,1) X]; 
+a2 = sigmoid(X_addBias * Theta1');
+
+a2_addBias = [ones(m,1) a2];
+a3 = sigmoid(a2_addBias * Theta2');
 
 
+for i=1:m
+  y_matrix(i,:) = eye(num_labels)(y(i,1),:);
+endfor
 
+J = 1 / m * sum(-y_matrix .* log(a3) - (1 - y_matrix) .* log(1 - a3)); %+ lambda / 2 / m * sum(theta_exceptBias .^ 2);
+J = sum(J);
 
 
 
