@@ -69,23 +69,22 @@ a2_addBias = [ones(m,1) a2];
 a3 = sigmoid(a2_addBias * Theta2');
 
 
+Theta1_exceptBias = Theta1;
+Theta1_exceptBias(:,1) = 0;
+
+Theta2_exceptBias = Theta2;
+Theta2_exceptBias(:,1) = 0;
+
+Theta_for_lambda = [Theta1_exceptBias(:);Theta2_exceptBias(:)];
+
 for i=1:m
   y_matrix(i,:) = eye(num_labels)(y(i,1),:);
 endfor
 
-J = 1 / m * sum(-y_matrix .* log(a3) - (1 - y_matrix) .* log(1 - a3)); %+ lambda / 2 / m * sum(theta_exceptBias .^ 2);
+J = 1 / m * sum(-y_matrix .* log(a3) - (1 - y_matrix) .* log(1 - a3));
 J = sum(J);
 
-
-
-
-
-
-
-
-
-
-
+J = J + lambda / 2 / m * sum(Theta_for_lambda .^ 2);
 
 
 
