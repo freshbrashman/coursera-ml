@@ -87,7 +87,11 @@ J = sum(J);
 J = J + lambda / 2 / m * sum(Theta_for_lambda .^ 2);
 
 
+delta3 = a3 - y_matrix;
+delta2 = (delta3 * Theta2_exceptBias)(:,2:end) .* sigmoidGradient(X_addBias * Theta1');
 
+Theta2_grad = 1 / m * (delta3' * a2_addBias) + lambda / m * Theta2_exceptBias;
+Theta1_grad = 1 / m * (delta2' * X_addBias) + lambda / m * Theta1_exceptBias;
 
 % -------------------------------------------------------------
 
