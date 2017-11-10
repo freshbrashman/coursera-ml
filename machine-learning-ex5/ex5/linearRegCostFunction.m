@@ -19,15 +19,18 @@ grad = zeros(size(theta));
 %               You should set J to the cost and grad to the gradient.
 %
 
+printf('****************************************************************\n')
+printf('size(X)=')
+size(X);
+printf('size(theta)=')
+size(theta);
+X;
+theta;
+printf('****************************************************************\n')
 
-
-
-
-
-
-
-
-
+J = 1 / 2 / m * sum((X*theta - y).^2) + lambda / 2 / m * (sum(theta.^2) - theta(1,1)^2);
+grad_dash = 1 / m * sum((X*theta - y) .* X) + lambda / m * theta';
+grad = grad_dash';
 
 
 % =========================================================================
