@@ -21,11 +21,12 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
+% 列方向にK(重心)のIndexを行方向にXのIndexを取るように全部自乗距離を算出
+for i=1:K
+    squareDistance(:, i) = sum((centroids(i,:) - X) .^ 2, 2);
+end
 
-
-
-
-
+[minVal, idx] = min(squareDistance, [], 2);
 
 % =============================================================
 
