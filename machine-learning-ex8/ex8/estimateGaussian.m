@@ -21,14 +21,11 @@ sigma2 = zeros(n, 1);
 %               should contain variance of the i-th feature.
 %
 
+trans_mu = sum(X) / m;
+tarans_sigma2 = sumsq(X - trans_mu) / m;
 
-
-
-
-
-
-
-
+mu = trans_mu .';
+sigma2 = tarans_sigma2 .';
 
 % =============================================================
 
