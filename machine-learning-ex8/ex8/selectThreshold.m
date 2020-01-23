@@ -23,17 +23,18 @@ for epsilon = min(pval):stepsize:max(pval)
     % Note: You can use predictions = (pval < epsilon) to get a binary vector
     %       of 0's and 1's of the outlier predictions
 
-
-
-
-
-
-
-
-
-
-
-
+    # アノマリーが陽性(=1)で、非アノマリーが陰性(=0)
+    predictions = pval < epsilon;
+    
+    true_positive = sum(predictions == yval & predictions == 1 );
+    false_positive = sum(predictions != yval & predictions == 1 );
+    false_negative = sum(predictions != yval & predictions == 0 );
+    # Positive予測したものの内のPositiveが当たったもの　→真陽性 / (真陽性＋偽陽性)
+    precision = true_positive / (true_positive + false_positive);
+    # 本当にPositiveだったものの内のPositive予測できたもの　→真陽性 / (真陽性＋偽陰性)
+    recall = true_positive / (true_positive + false_negative);
+    
+    F1 = 2 * precision * recall / (precision + recall);
 
     % =============================================================
 
